@@ -17,17 +17,17 @@ export class EmployeesController {
     return this.employeesService.findAll();
   }
 
-  @Get(':id')
+  @Get('/:id')
   findOne(@Param('id', new ParseUUIDPipe({version: "4"})) id: string) {
     return this.employeesService.findOne(id);
   }
 
-  @Patch(':id')
+  @Patch('/:id')
   update(@Param('id', new ParseUUIDPipe({version: "4"})) id: string, @Body() updateEmployeeDto: UpdateEmployeeDto) {
     return this.employeesService.update(id, updateEmployeeDto);
   }
 
-  @Delete(':id')
+  @Delete('/:id')
   remove(@Param('id', new ParseUUIDPipe({version: "4"})) id: string) {
     return this.employeesService.remove(id);
   }
