@@ -5,7 +5,6 @@ import { AppService } from './app.service';
 import { EmployeesModule } from './employees/employees.module';
 import { ProductsModule } from './products/products.module';
 
-
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -16,6 +15,7 @@ import { ProductsModule } from './products/products.module';
       password: "MyPassword",
       database: process.env.name,
       entities: [],
+      autoLoadEntities: true,
       synchronize: true
 
     }),

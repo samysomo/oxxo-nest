@@ -2,6 +2,7 @@ import { IsInt, IsNumber, IsOptional, IsString, IsUUID, MaxLength} from "class-v
 
 export class CreateProductDto {
     @IsUUID("4")
+    @IsOptional()
     productId: string;
 
     @IsString()
@@ -16,5 +17,6 @@ export class CreateProductDto {
     countSeal: number;
 
     @IsUUID("4")
+    @IsOptional()
     provider: string;
 }
