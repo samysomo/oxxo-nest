@@ -5,7 +5,6 @@ import { v4 as uuid } from 'uuid';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Product } from './entities/product.entity';
 import { Repository } from 'typeorm';
-import { identity } from 'rxjs';
 
 
 @Injectable()
@@ -32,7 +31,12 @@ export class ProductsService {
     return this.productRepository.find();
   }
 
-  findByProvider(provider: string){
+  findByProvider(providerId: string){
+    return this.productRepository.findBy({
+      provider: {
+        providerId : providerId
+      }
+    })
   }
 
   async update(productId: string, updateProductDto: UpdateProductDto) {

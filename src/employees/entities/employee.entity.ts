@@ -1,3 +1,4 @@
+import { IsOptional } from "class-validator";
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
@@ -16,4 +17,11 @@ export class Employee {
 
     @Column({type: "text"})
     email: string;
+
+    @IsOptional()
+    @Column({
+        type: "text",
+        nullable: true
+    })
+    photoUrl: string;
 }
