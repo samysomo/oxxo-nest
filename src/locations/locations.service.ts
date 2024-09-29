@@ -3,10 +3,12 @@ import { CreateLocationDto } from './dto/create-location.dto';
 import { UpdateLocationDto } from './dto/update-location.dto';
 import { Repository } from 'typeorm';
 import { Location } from './entities/location.entity';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class LocationsService {
   constructor(
+    @InjectRepository(Location)
     private locationRepository : Repository<Location>
   ){}
   create(createLocationDto: CreateLocationDto) {
@@ -31,8 +33,7 @@ export class LocationsService {
       ...updateLocationDto
     });
     if(!updatedLocation) throw new NotFoundException()
-    this.locationRepository.save(updatedLocation)
-    return updatedLocation;
+    return this.locationRepository.save(updatedLocation)
   }
 
   remove(id: number) {
