@@ -20,6 +20,7 @@ export class AuthService {
     createUserDto.userPassword = bcrypt.hashSync(createUserDto.userPassword, 5)
     return this.userRepository.save(createUserDto)
   }
+
   async loginUser(loginUserDto : LoginUserDto) {
     const user = await this.userRepository.findOne({
       where:{
@@ -36,4 +37,14 @@ export class AuthService {
     })
     return token
   }
+
+  async updateUser(userEmail: string, updateUserDto : UpdateUserDto) {
+    const updatedUserData = await this.userRepository.preload({
+      userEmail,
+      ... updateUserDto
+    })
+    this.userRepository.save(updatedUserData)
+    return updatedUserData
+  }
+
 }

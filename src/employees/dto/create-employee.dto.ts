@@ -3,20 +3,20 @@ import { IsEmail, IsNumber, IsOptional, IsString, IsUUID, MaxLength } from "clas
 export class CreateEmployeeDto {
     @IsUUID()
     @IsOptional()
-    id: string;
+    employeeId: string;
 
     @IsString()
     @MaxLength(50)
-    name: string;
+    employeeName: string;
 
     @IsString()
     @MaxLength(50)
-    lastName: string;
+    employeeLastName: string;
 
     @IsString()
     @MaxLength(20)
-    phoneNumber: string;
+    employeePhoneNumber: string;
 
     @IsEmail()
-    email: string;
+    employeeEmail: string;
 }

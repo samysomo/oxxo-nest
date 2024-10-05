@@ -24,7 +24,7 @@ export class EmployeesService {
 
   findOne(id: string) {
     const employee = this.employeeRepository.findOneBy({
-      id: id
+      employeeId: id
     })
     if(!employee) throw new NotFoundException(); 
     return employee;
@@ -32,7 +32,7 @@ export class EmployeesService {
 
   async update(id: string, updateEmployeeDto: UpdateEmployeeDto) {
     const updatedEmployee = await this.employeeRepository.preload({
-      id: id,
+      employeeId: id,
       ...updateEmployeeDto
     })
     if(!updatedEmployee) throw new NotFoundException(); 
@@ -42,7 +42,7 @@ export class EmployeesService {
 
   remove(id: string) {
     this.employeeRepository.delete({
-      id: id
+      employeeId: id
     }) 
     return {
       message: `Successfully deleted employee with id: ${id}`
