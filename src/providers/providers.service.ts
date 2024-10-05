@@ -1,9 +1,10 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, UseGuards } from '@nestjs/common';
 import { CreateProviderDto } from './dto/create-provider.dto';
 import { UpdateProviderDto } from './dto/update-provider.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Provider } from './entities/provider.entity';
 import { Like, Repository } from 'typeorm';
+import { AuthGuard } from 'src/auth/guards/auth.guard';
 
 @Injectable()
 export class ProvidersService {
