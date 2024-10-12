@@ -3,7 +3,9 @@ import { AuthService } from './auth.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { LoginUserDto } from './dto/login-user.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags("Auth")
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
@@ -17,7 +19,7 @@ export class AuthController {
     return this.authService.loginUser(loginUserDto)
   }
   @Put("/:email")
-  updateUser(@Param("email") userEmail, @Body() updateUserDto: UpdateUserDto){
+  updateUser(@Param("email") userEmail : string, @Body() updateUserDto: UpdateUserDto){
     return this.authService.updateUser(userEmail, updateUserDto)
   }
 }

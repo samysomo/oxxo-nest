@@ -7,7 +7,7 @@ import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn
 export class Employee {
     @PrimaryGeneratedColumn("uuid")
     employeeId: string;
-
+    
     @Column({type: "text"})
     employeeName: string;
 
