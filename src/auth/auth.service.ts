@@ -27,7 +27,7 @@ export class AuthService {
         userEmail : loginUserDto.userEmail
       }
     })
-    if(!user) throw new NotFoundException("Ese usuario no existe")
+    if(!user) throw new UnauthorizedException("Ese usuario no existe")
     const match = await bcrypt.compare(loginUserDto.userPassword, user.userPassword)
     if(!match) throw new UnauthorizedException("No estas autorizado")
     const token = this.jwtService.sign({
