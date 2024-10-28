@@ -15,19 +15,26 @@ export class Location {
     @Column("text")
     locationName: string;
 
+    @ApiProperty({
+        default: "Avenida tal, S/N, 76220"
+    })
     @Column("text")
     locationAddress: string;
 
+    @ApiProperty({
+        default: [12, 13]
+    })
     @Column("simple-array")
     locationLatling: number[];
 
+    @ApiProperty()
     @OneToOne(() => Manager, {
         eager: true
     })
     @JoinColumn({
         name: "managerId"
     })
-    manager: Manager
+    manager: Manager | string
 
     @ManyToOne(() => Region, (region) => region.locations)
     @JoinColumn({
