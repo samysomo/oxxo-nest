@@ -15,7 +15,7 @@ export class CreateManagerDto extends Manager{
     @IsNumber()
     managerSalary: number;
 
-    @IsObject()
+    @IsNumber()
     @IsOptional()
     location: Location;
 }
