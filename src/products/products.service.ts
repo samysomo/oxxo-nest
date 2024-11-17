@@ -20,15 +20,24 @@ export class ProductsService {
   }
 
   findOne(productId: string) {
-    const productFound = this.productRepository.findOneBy({
-      productId: productId
+    const productFound = this.productRepository.findOne({
+      where : {
+        productId : productId
+      },
+      relations: {
+        provider: true
+      }
     });
     if(!productFound) throw new NotFoundException(); 
     return productFound;
   }
 
   findAll() {
-    return this.productRepository.find();
+    return this.productRepository.find({
+      relations: {
+        provider: true
+      }
+    });
   }
 
   findByProvider(providerId: string){

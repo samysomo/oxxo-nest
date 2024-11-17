@@ -7,12 +7,18 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import * as bcrypt from "bcrypt"
 import { JwtService } from '@nestjs/jwt';
 import { LoginUserDto } from './dto/login-user.dto';
+import { Employee } from 'src/employees/entities/employee.entity';
+import { Manager } from 'src/managers/entities/manager.entity';
 
 @Injectable()
 export class AuthService {
   constructor(
     @InjectRepository(User)
     private userRepository : Repository<User>,
+    @InjectRepository(Employee)
+    private employeeRepository : Repository<Employee>,
+    @InjectRepository(Manager)
+    private managerRepository : Repository<Manager>,
     private jwtService : JwtService
   ){}
 
