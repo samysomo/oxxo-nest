@@ -77,6 +77,12 @@ export class EmployeesController {
     return this.employeesService.findByLocation(+id)
   }
 
+  @Auth(ROLES.MANAGER, ROLES.EMPLOYEE)
+  @Get('/email/:email')
+  findOneByEmail(@Param('email') email: string) {
+    return this.employeesService.findOneByEmail(email);
+  }
+
   @Auth(ROLES.EMPLOYEE)
   @UseInterceptors(FileInterceptor("employeePhoto"))
   @Patch('/:id')

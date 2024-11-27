@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Put, Res } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Put, Res, BadRequestException, Query } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -12,10 +12,20 @@ import { TOKEN_NAME } from './constants/jwt.constants';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @Post("signup")
-  signup(@Body() createUserDto : CreateUserDto){
-    return this.authService.registerUser(createUserDto)
+  @Post("register/:id")
+  registerEmployee(
+    @Query("role") role : string,
+    @Body() createUserDto : CreateUserDto, 
+    @Param("id") id : string)
+    {
+      if(role === "Manager"){
+        return this.authService.registerManager(id, createUserDto)
+      } else if (role === "Employee") {
+        return this.authService.registerEmployee(id, createUserDto)
+      }
+      throw new BadRequestException("Rol Invalido")
   }
+
   @Post("login")
   async login(@Body() loginUserDto : LoginUserDto, @Res({passthrough: true}) response: Response){
     const token = await this.authService.loginUser(loginUserDto)
@@ -27,8 +37,8 @@ export class AuthController {
     })
     return
   }
-  @Put("/:email")
-  updateUser(@Param("email") userEmail : string, @Body() updateUserDto: UpdateUserDto){
-    return this.authService.updateUser(userEmail, updateUserDto)
+  @Patch("/:id")
+  updateUser(@Param("id") id : string, @Body() updateUserDto: UpdateUserDto){
+    return this.authService.updateUser(id, updateUserDto)
   }
 }

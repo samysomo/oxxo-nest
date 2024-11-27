@@ -32,7 +32,8 @@ export class EmployeesService {
         employeeId: id
       },
       relations: {
-        location: true
+        location: true,
+        user: true
       }
     })
     if(!employee) throw new NotFoundException(); 
@@ -46,6 +47,18 @@ export class EmployeesService {
       }
     })
     return employees
+  }
+
+  findOneByEmail(email: string){
+    const employee = this.employeeRepository.findOne({
+      where: {employeeEmail : email},
+      relations: {
+        location : true,
+        user: true
+      }
+    })
+    if (!employee) throw new NotFoundException()
+      return employee
   }
 
   async update(id: string, updateEmployeeDto: UpdateEmployeeDto) {

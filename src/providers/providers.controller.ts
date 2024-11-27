@@ -26,8 +26,7 @@ export class ProvidersController {
 
   @Auth(ROLES.EMPLOYEE, ROLES.MANAGER)
   @Get()
-  findAll(@UserData() user: User) {
-    if(user.userRoles.includes("Employee")) throw new UnauthorizedException("No estas autorizado, solo admins y managers")
+  findAll() {
     return this.providersService.findAll();
   }
 

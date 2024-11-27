@@ -17,7 +17,8 @@ export class ManagersService {
 
   findAll() {
     return this.managerRepository.find({relations: {
-      location: true
+      location: true,
+      user: true
     }})
   }
 
@@ -25,11 +26,24 @@ export class ManagersService {
     const manager = this.managerRepository.findOne({
       where: {managerId: id},
       relations: {
-        location: true
+        location: true,
+        user: true
       }
     })
     if (!manager) throw new NotFoundException()
     return manager
+  }
+
+  findOneByEmail(email: string){
+    const manager = this.managerRepository.findOne({
+      where: {managerEmail : email},
+      relations: {
+        location : true,
+        user: true
+      }
+    })
+    if (!manager) throw new NotFoundException()
+      return manager
   }
 
   async update(id: string, updateManagerDto: UpdateManagerDto) {

@@ -32,6 +32,12 @@ export class ManagersController {
   }
 
   @Auth(ROLES.MANAGER)
+  @Get('/email/:email')
+  findOneByEmail(@Param('email') email: string) {
+    return this.managersService.findOneByEmail(email);
+  }
+
+  @Auth(ROLES.MANAGER)
   @Patch(':id')
   update(@Param('id', new ParseUUIDPipe({version: "4"})) id: string, @Body() updateManagerDto: UpdateManagerDto) {
     return this.managersService.update(id, updateManagerDto);
