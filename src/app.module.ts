@@ -19,25 +19,11 @@ import { AwsModule } from './aws/aws.module';
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
-      useFactory: (configService: ConfigService) => {
-        console.log({
-          host: configService.get<string>('host'),
-          port: parseInt(configService.get<string>('port'), 10),
-          username: configService.get<string>('username'),
-          pass: configService.get<string>('pass'),
-          name: configService.get<string>('name'),
-        });
-        return {
+      useFactory: async (configService: ConfigService) => ({
         type: 'postgres',
-        host: configService.get<string>('host'),
-        port: parseInt(configService.get<string>('port'), 10),
-        username: "postgres",
-        password: configService.get<string>('pass'),
-        database: configService.get<string>('name'),
-        entities: [],
+        url: configService.get<string>('DATABASE_URL'),
         autoLoadEntities: true,
-        synchronize: true, // Desactiva en producción
-      }},
+      }),
     }),
     EmployeesModule,
     ProductsModule,
