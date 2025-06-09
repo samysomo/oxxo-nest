@@ -9,7 +9,7 @@ async function bootstrap() {
     cors : {
       origin: [
         'http://localhost:3000', // desarrollo local
-        'https://oxxo-front.vercel.app', // producción
+        'https://ocsof.samysl.xyz', // producción
     ],
       credentials: true
     }
