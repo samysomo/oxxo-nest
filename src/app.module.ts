@@ -23,6 +23,7 @@ import { AwsModule } from './aws/aws.module';
         type: 'postgres',
         url: configService.get<string>('DATABASE_URL'),
         autoLoadEntities: true,
+        
       }),
     }),
     EmployeesModule,

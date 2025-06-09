@@ -7,7 +7,10 @@ import * as cookieParser from "cookie-parser"
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     cors : {
-      origin: "http://localhost:3000",
+      origin: [
+        'http://localhost:3000', // desarrollo local
+        'https://oxxo-front-d39q3sw3v-samysomos-projects.vercel.app', // producción
+    ],
       credentials: true
     }
   });
